@@ -15,18 +15,19 @@ def process(path_file, instance):
         "linhas_do_arquivo": file,
     }
     instance.enqueue(result)
-    sys.stdout.write(str(result))
-    return result
+    print(result)
 
 
 def remove(instance):
     if not instance:
-        return sys.stdout.write('Não há elementos\n')
+        return print('Não há elementos')
     file = instance.dequeue()
-    sys.stdout.write(
-        f"Arquivo {file['nome_do_arquivo']} removido com sucesso\n"
-    )
+    print(f"Arquivo {file['nome_do_arquivo']} removido com sucesso\n")
 
 
 def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
+    try:
+        result = instance.search(position)
+        print(result)
+    except IndexError:
+        print('Posição inválida', file=sys.stderr)
